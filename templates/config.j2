@@ -297,8 +297,87 @@
         <flush_interval_milliseconds>7500</flush_interval_milliseconds>
     </query_thread_log>
 
-    <!-- Uncomment if use part log.
-         Part log contains information about all actions with parts in MergeTree tables (creation, deletion, merges, downloads).
+    <text_log>
+        <database>system</database>
+        <table>text_log</table>
+        <partition_by>toYYYYMM(event_date)</partition_by>
+        {% if clickhouse_text_log_ttl is defined %}
+        <ttl>{{ clickhouse_text_log_ttl }}</ttl>
+        {% endif %}
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+    </text_log>
+
+    <trace_log>
+        <database>system</database>
+        <table>trace_log</table>
+        <partition_by>toYYYYMM(event_date)</partition_by>
+        {% if clickhouse_trace_log_ttl is defined %}
+        <ttl>{{ clickhouse_trace_log_ttl }}</ttl>
+        {% endif %}
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+    </trace_log>
+
+    <processors_profile_log>
+        <database>system</database>
+        <table>processors_profile_log</table>
+        <partition_by>toYYYYMM(event_date)</partition_by>
+        {% if clickhouse_processors_profile_log_ttl is defined %}
+        <ttl>{{ clickhouse_processors_profile_log_ttl }}</ttl>
+        {% endif %}
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+    </processors_profile_log>
+
+    <query_metric_log>
+        <database>system</database>
+        <table>query_metric_log</table>
+        <partition_by>toYYYYMM(event_date)</partition_by>
+        {% if clickhouse_query_metric_log_ttl is defined %}
+        <ttl>{{ clickhouse_query_metric_log_ttl }}</ttl>
+        {% endif %}
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+    </query_metric_log>
+
+    <part_log>
+        <database>system</database>
+        <table>part_log</table>
+        <partition_by>toYYYYMM(event_date)</partition_by>
+        {% if clickhouse_part_log_ttl is defined %}
+        <ttl>{{ clickhouse_part_log_ttl }}</ttl>
+        {% endif %}
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+    </part_log>
+
+    <asynchronous_metric_log>
+        <database>system</database>
+        <table>asynchronous_metric_log</table>
+        <partition_by>toYYYYMM(event_time)</partition_by>
+        {% if clickhouse_asynchronous_metric_log_ttl is defined %}
+        <ttl>{{ clickhouse_asynchronous_metric_log_ttl }}</ttl>
+        {% endif %}
+        <flush_interval_milliseconds>60000</flush_interval_milliseconds>
+    </asynchronous_metric_log>
+
+    <aggregated_zookeeper_log>
+        <database>system</database>
+        <table>aggregated_zookeeper_log</table>
+        <partition_by>toYYYYMM(event_date)</partition_by>
+        {% if clickhouse_aggregated_zookeeper_log_ttl is defined %}
+        <ttl>{{ clickhouse_aggregated_zookeeper_log_ttl }}</ttl>
+        {% endif %}
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+    </aggregated_zookeeper_log>
+
+    <background_schedule_pool_log>
+        <database>system</database>
+        <table>background_schedule_pool_log</table>
+        <partition_by>toYYYYMM(event_date)</partition_by>
+        {% if clickhouse_background_schedule_pool_log_ttl is defined %}
+        <ttl>{{ clickhouse_background_schedule_pool_log_ttl }}</ttl>
+        {% endif %}
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+    </background_schedule_pool_log>
+
+    <!-- Uncomment if use part log (legacy commented block kept for reference).
     <part_log>
         <database>system</database>
         <table>part_log</table>
